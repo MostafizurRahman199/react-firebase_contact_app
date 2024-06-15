@@ -10,8 +10,13 @@ import { IoIosContact } from "react-icons/io";
 import { db } from "./config/firebase";
 import { FaRegEdit } from "react-icons/fa";
 import ContactCard from "./components/ContactCard";
+import Modal from "./components/Modal";
+import AddAndUpdateContact from "./components/AddAndUpdateContact";
 
 function App() {
+
+  const [isOpen, setOpen] = useState(false);
+  
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
@@ -35,26 +40,43 @@ function App() {
     getContacts();
   }, []);
 
+
+  const onOpen = ()=>{
+    setOpen(true);
+  }
+
+  const onClose = ()=>{
+    setOpen(false)
+  }
+
   return (
+   <>
     <div className="max-w-[370px] mx-auto px-4 ">
       <Navbar></Navbar>
       <div className="flex  relative items-center">
         <CiSearch className="text-white text-3xl font-semibold absolute ml-1" />
-        <input
+        <input placeholder="Search Contact"
           type="text"
           className="border border-white rounded-md h-10 bg-transparent flex-grow text-white pl-9"
         />
-        <div className="text-5xl text-white pl-2 cursor-pointer">
-          <IoIosAddCircleOutline />
+        <div className="text-5xl text-white pl-2 ">
+          {/* <IoIosAddCircleOutline /> */}
+          <p className="size-9 cursor-pointer" onClick={()=>onOpen()}><img src="/public/add-user (1).png" alt="" /></p>
         </div>
       </div>
 
-      <div>
-        {contacts.map((contact) => (
-       <ContactCard key={contact.id} contact={contact}></ContactCard>
-        ))}
-      </div>
+    {
+      isOpen === false ?   <div>
+      {contacts.map((contact) => (
+     <ContactCard key={contact.id} contact={contact}></ContactCard>
+      ))}
     </div>
+    : <AddAndUpdateContact onClose={onClose} onOpen={onOpen} isOpen={isOpen}></AddAndUpdateContact>
+    }
+    </div>
+  
+  
+   </>
   );
 }
 
