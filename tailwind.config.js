@@ -14,6 +14,9 @@ export default {
         dark_yellow:"#FFEAAE",
         orange:"#5F00D9",
       },
+      backgroundImage: {
+        'custom-pattern': "url('/public/1_xFyy_8vcIody08eRyXscpQ.png')",
+      }
     },
   },
   plugins: [],

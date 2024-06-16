@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import { Field, Form, Formik } from "formik";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { toast } from "react-toastify";
 
 export default function AddAndUpdateContact({
   onClose,
@@ -11,23 +12,25 @@ export default function AddAndUpdateContact({
   children,
   setOpen,
   isUpdate,
-  contact,
+  contact = {}, // Provide a default empty object
 }) {
   const addContact = async (contact) => {
     try {
       const dataRef = collection(db, "react_contacts");
       await addDoc(dataRef, contact);
       setOpen(false);
-      
+      toast.success("Contact Added Successfully!");
     } catch (error) {
       console.log(error);
     }
   };
+  
   const updateContact = async (contact, id) => {
     try {
       const dataRef = doc(db, "react_contacts", id);
       await updateDoc(dataRef, contact);
       setOpen(false);
+      toast.success("Contact updated Successfully!");
     } catch (error) {
       console.log(error);
     }
@@ -38,12 +41,12 @@ export default function AddAndUpdateContact({
       <Modal onClose={onClose} onOpen={onOpen} isOpen={isOpen}>
         <Formik
           initialValues={
-            isUpdate === 1
+            isUpdate
               ? {
-                  name: contact.name,
-                  phone: contact.phone,
-                  email: contact.email,
-                  gender: contact.gender,
+                  name: contact.name ,
+                  phone: contact.phone ,
+                  email: contact.email ,
+                  gender: contact.gender ,
                 }
               : {
                   name: "",
@@ -53,7 +56,7 @@ export default function AddAndUpdateContact({
                 }
           }
           onSubmit={(values) => {
-            isUpdate === 1
+            isUpdate
               ? updateContact(values, contact.id)
               : addContact(values);
           }}
@@ -66,33 +69,24 @@ export default function AddAndUpdateContact({
 
             <div className="flex flex-col">
               <label htmlFor="phone">Phone</label>
-              <Field
-                name="phone"
-                className="h-10 border rounded-lg p-2"
-              ></Field>
+              <Field name="phone" className="h-10 border rounded-lg p-2"></Field>
             </div>
 
             <div className="flex flex-col">
               <label htmlFor="email">Email</label>
-              <Field
-                name="email"
-                className="h-10 border rounded-lg p-2"
-              ></Field>
+              <Field name="email" className="h-10 border rounded-lg p-2"></Field>
             </div>
 
             <div className="flex flex-col">
               <label htmlFor="gender">Gender</label>
-              <Field
-                name="gender"
-                className="h-10 border rounded-lg p-2"
-              ></Field>
+              <Field name="gender" className="h-10 border rounded-lg p-2"></Field>
             </div>
 
             <button
               className="bg-blue-900 px-4 py-2 rounded-md text-white max-w-[100%] m-auto"
               type="submit"
             >
-              {isUpdate === 1 ? "Update Contact" : "Add Contact"}
+              {isUpdate ? "Update Contact" : "Add Contact"}
             </button>
           </Form>
         </Formik>
