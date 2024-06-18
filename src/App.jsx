@@ -11,6 +11,7 @@ import AddAndUpdateContact from "./components/AddAndUpdateContact";
 import useDisclouse from "./hooks/useDisclouse";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotFoundContact from "./components/NotFoundContact";
 
 function App() {
   const { isOpen, setOpen, onOpen, onClose } = useDisclouse();
@@ -71,7 +72,7 @@ function App() {
 
           {isOpen == false ? (
             <div>
-              {contacts.map((contact) => (
+             {contacts.length <= 0 ? <NotFoundContact></NotFoundContact> : contacts.map((contact) => (
                 <ContactCard
                   key={contact.id}
                   contact={contact}
@@ -93,7 +94,7 @@ function App() {
               setFlag={setFlag}
               isFlag={isFlag}
             />
-          )}
+          ) } 
         </div>
         <ToastContainer
           position="bottom-center"
