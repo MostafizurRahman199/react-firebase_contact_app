@@ -22,7 +22,7 @@ export default function ContactCard({ contact,
   const deleteContact = async (id) => {
     try {
       await deleteDoc(doc(db, "react_contacts", id));
-      toast.success("Contact Added Successfully!");
+      toast.success("Contact Deleted Successfully!");
     } catch (error) {
       console.log(error);
     }
