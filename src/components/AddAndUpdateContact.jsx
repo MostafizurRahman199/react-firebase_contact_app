@@ -12,13 +12,20 @@ export default function AddAndUpdateContact({
   children,
   setOpen,
   isUpdate,
+  
+  
   contact = {}, // Provide a default empty object
+
 }) {
+
+  console.log(isOpen);
+  // console.log(isFlag);
   const addContact = async (contact) => {
     try {
       const dataRef = collection(db, "react_contacts");
       await addDoc(dataRef, contact);
       setOpen(false);
+     
       toast.success("Contact Added Successfully!");
     } catch (error) {
       console.log(error);
@@ -30,15 +37,17 @@ export default function AddAndUpdateContact({
       const dataRef = doc(db, "react_contacts", id);
       await updateDoc(dataRef, contact);
       setOpen(false);
+    
       toast.success("Contact updated Successfully!");
     } catch (error) {
       console.log(error);
     }
   };
 
+
   return (
     <div>
-      <Modal onClose={onClose} onOpen={onOpen} isOpen={isOpen}>
+      <Modal onClose={onClose} onOpen={onOpen} isOpen={isOpen}  >
         <Formik
           initialValues={
             isUpdate
