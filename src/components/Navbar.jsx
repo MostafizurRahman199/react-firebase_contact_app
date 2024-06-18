@@ -31,7 +31,7 @@ export default function Navbar({setContacts,contacts,isOpen, onOpen}) {
   return (
    <>
    
-   <div className="bg-white gap-2 my-2 items-center text-xl font-medium fixed top-0 left-98 w-[350px] z-200 h-24">
+   <div className=" gap-2 my-2 items-center text-xl font-medium fixed top-0 left-98 w-[350px] z-200 h-24">
      <div className='flex justify-center' >
      <img src="/logos_firebase.svg" alt="logo firebase" />
      <h1>Firebase Contact App</h1>

@@ -15,8 +15,8 @@ export default {
         orange:"#5F00D9",
       },
       backgroundImage: {
-        'custom-pattern': "url('/public/1_xFyy_8vcIody08eRyXscpQ.png')",
-      }
+        'custom-bg': "url('/path/to/your/image.jpg')",
+      },
     },
   },
   plugins: [],

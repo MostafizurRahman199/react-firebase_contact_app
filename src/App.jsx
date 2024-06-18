@@ -65,49 +65,49 @@ function App() {
 
   return (
     <>
-      <div className="max-w-[370px] mx-auto px-4 py-24">
-        <Navbar setContacts={setContacts} contacts={contacts} isOpen={isOpen} onOpen={onOpen}></Navbar>
-       
+      
+        <div className="max-w-[370px] mx-auto px-4 py-24">
+          <Navbar setContacts={setContacts} contacts={contacts} isOpen={isOpen} onOpen={onOpen} />
 
-        {isOpen== false ? (
-          <div>
-            {contacts.map((contact) => (
-              <ContactCard
-                key={contact.id}
-                contact={contact}
-                setContacts={setContacts}
-                onOpen={onOpen}
-                onClose={onClose}
-                setOpen={setOpen}
-                setFlag={setFlag}
-                isFlag={isFlag}
-              />
-            ))}
-          </div>
-        ) : (
-          <AddAndUpdateContact
-            onClose={onClose}
-            onOpen={onOpen}
-            isOpen={isOpen}
-            setOpen={setOpen}
-            setFlag={setFlag}
-            isFlag={isFlag}
-            
-          />
-        )}
-      </div>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+          {isOpen == false ? (
+            <div>
+              {contacts.map((contact) => (
+                <ContactCard
+                  key={contact.id}
+                  contact={contact}
+                  setContacts={setContacts}
+                  onOpen={onOpen}
+                  onClose={onClose}
+                  setOpen={setOpen}
+                  setFlag={setFlag}
+                  isFlag={isFlag}
+                />
+              ))}
+            </div>
+          ) : (
+            <AddAndUpdateContact
+              onClose={onClose}
+              onOpen={onOpen}
+              isOpen={isOpen}
+              setOpen={setOpen}
+              setFlag={setFlag}
+              isFlag={isFlag}
+            />
+          )}
+        </div>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+    
     </>
   );
 }
